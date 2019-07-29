@@ -20,22 +20,30 @@ li {
 
   <script>
     /*best practice:incremental build out -build little bits and check often
-    you want to have stuff in data in system(database) want to have something to display---***now going to remove items using addEventHandler 'click' event ***
+    you want to have stuff in data in system(database) want to have something
+    to display---***now going to remove items using addEventListener 'click' event ***
     */
     const colorList = document.querySelector('#colorList'); //#sign bcuz --> id
     let chosenColors = ['red', 'green'];  ///is representing the "state" of this application
 
     colorList.addEventListener('click', (ev)=> {
       if (ev.target.tagName === 'LI') { ///tagName always comes in CAPS
-        console.log(ev);   //displays on dev tools cosole
+        const idx = ev.target.getAttribute('data-idx')*1;
+        //    ^^^idx is returned as string,           ^^needs change to number
+
+        chosenColors = chosenColors.filter((color,_idx)=> {  // use _idx to have access to what you clicked on
+           return _idx !== idx; // returns idx of items NOT clicked on
+           });
+        render();
       }
     });
 
     const render = () => {   ///likes to do this w/ anything that is a list
-      const html = chosenColors.map(color => {
+      const html = chosenColors.map((color, idx) => { // get index of what you're mapping
         ///template literal, will use alot. basically a string
+        // data-idx is arbitray attribute  common convent. put "data" in front of idx
         return `
-          <li style= 'background-color:${color}'>
+          <li style= 'background-color:${color}' data-idx= '${idx}'>
             ${ color }
           </li>
         `;
