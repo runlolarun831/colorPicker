@@ -19,23 +19,31 @@ li {
     </ul>
 
   <script>
-  //best practice:incremental build out -build little bits and check often
+    /*best practice:incremental build out -build little bits and check often
+    you want to have stuff in data in system(database) want to have something to display---***now going to remove items using addEventHandler 'click' event ***
+    */
+    const colorList = document.querySelector('#colorList'); //#sign bcuz --> id
+    let chosenColors = ['red', 'green'];  ///is representing the "state" of this application
 
-  const colorList = document.querySelector('#colorList'); //#sign bcuz --> id
-  let chosenColors = ['red', 'green'];  ///is representing the "state" of this application
+    colorList.addEventListener('click', (ev)=> {
+      if (ev.target.tagName === 'LI') { ///tagName always comes in CAPS
+        console.log(ev);   //displays on dev tools cosole
+      }
+    });
 
-  const render = () => {   ///likes to do this w/ anything that is a list
-    const html = chosenColors.map(color => {
-      ///template literal, will use alot. basically a string
-      return `
-      <li style= 'background-color:${color}'>
-        ${ color }
-      </li>
-      `;
-    }).join('');
-    colorList.innerHTML = html;
-  };
-  render();
-    </script>
+    const render = () => {   ///likes to do this w/ anything that is a list
+      const html = chosenColors.map(color => {
+        ///template literal, will use alot. basically a string
+        return `
+          <li style= 'background-color:${color}'>
+            ${ color }
+          </li>
+        `;
+      }).join('');
+      colorList.innerHTML = html;
+    };
+
+    render();
+  </script>
   </body>
 </html>
