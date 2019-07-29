@@ -1,0 +1,41 @@
+<html>
+  <head>
+<style>
+body {
+  font-family: verdana;
+}
+li {
+  height: 2rem;
+  font-size: 1.5rem;
+  color: white;
+}
+
+</style>
+
+  </head>
+  <body>
+    <h1> Color Picker</h1>
+    <ul id='colorList'>
+    </ul>
+
+  <script>
+  //best practice:incremental build out -build little bits and check often
+
+  const colorList = document.querySelector('#colorList'); //#sign bcuz --> id
+  let chosenColors = ['red', 'green'];  ///is representing the "state" of this application
+
+  const render = () => {   ///likes to do this w/ anything that is a list
+    const html = chosenColors.map(color => {
+      ///template literal, will use alot. basically a string
+      return `
+      <li style= 'background-color:${color}'>
+        ${ color }
+      </li>
+      `;
+    }).join('');
+    colorList.innerHTML = html;
+  };
+  render();
+    </script>
+  </body>
+</html>
